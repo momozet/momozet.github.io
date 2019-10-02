@@ -1,2 +1,0 @@
-# momozet.github.io
-mypage
