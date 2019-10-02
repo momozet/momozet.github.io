@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body{
+   /* 背景色指定 */
+background: linear-gradient(45deg, green, black);
+color:#cccccc;
+}
+#d1{
+  background: #dddddd;
+  width: 910px;
+  height: 650px;
+  text-align: center;
+  border: 1px solid #cccccc;
+  margin: 0px auto;
+}
+#d2{
+  background: #dddddd;
+  width: 910px;
+  height: 30px;
+  text-align: center;
+  margin: 0px auto;
+  color: black;
+  font-size: 150%;
+}
+#d3{
+  position: absolute;
+  top: 10px;
+  background: #dddddd;
+  width: 70px;
+  height: 30px;
+  text-align: center;
+  margin:0 0 0 auto;
+  color: black;
+}
+#m{
+  background: yellow;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  margin:0 0 0 auto;
+  color: black;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+}
+#x{
+  background: red;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  margin:0 0 0 auto;
+  color: black;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+}
+#terminal {
+text-align: left;
+height: 600px;
+width: 900px;
+background: #222222;
+color: white;
+
+font-family: inherit;
+font-size: 120%;
+}
+</style>
+</head>
+<body>
+<div id="d1">
+<div id="d2">
+terminal emulator for web
+</div>
+<div id="d3">
+<input id="x" type="button" value="X">
+<input id="m" type="button" value="□">
+</div>
+<textarea id="terminal" rows="30" cols="160" name="at" onkeydown="count()" onkeyup="cmd()">
+loading ...</textarea>
+</div>
+
+<script>
+const home="linux@web-emulator ~ $ ";
+let pr="this is the quasi terminal emulator\nversion 0.2.1\nsome command will be rejected\n\n";
+let dir=home;
+document.getElementById('terminal').value=pr+dir;
+let num=0;
+
+/*
+let buf="";
+window.onload = function(){
+  //1000ミリ秒（1秒）毎に関数「showNowDate()」を呼び出す
+  setInterval("update()", 1000);
+}
+function update(){
+  document.getElementById('terminal').value=buf;
+}
+*/
+
+function cmd(){
+if (event.key === 'Enter') {
+const text=document.getElementById('terminal').value
+//num=num+1;
+let sh=`${num}`+"\n";
+if(num==6){
+dir=">>> ";
+sh="Python 3.6.5 (default, Apr 20 2018, 20:16:59) \n[GCC 5.4.0 20160609] on linux\nType \"help\", \"copyright\", \"credits\" or \"license\" for more information.\n";
+}else if(num==2){
+gosl(text+dir);
+}else{
+sh="コマンドが見つかりません\n";
+dir=home;
+}
+document.getElementById('terminal').value=text+sh+dir;
+num=0;
+let ta=document.getElementById('terminal');
+ta.scrollTop = ta.scrollHeight;
+}
+}
+function count(){
+  if (event.key === 'Enter') {
+  }else{
+  num=num+1;
+  }
+}
+
+function gosl(text){
+  let slsl = new Array(10);
+  slsl[0]="      ====        ________                ___________ ";
+  slsl[1]="  _D _|  |_______/        \\__I_I_____===__|_________| ";
+  slsl[2]="   |(_)---  |   H\\________/ |   |        =|___ ___|   ";
+  slsl[3]="   /     |  |   H  |  |     |   |         ||_| |_||   ";
+  slsl[4]="  |      |  |   H  |__--------------------| [___] |   ";
+  slsl[5]="  | ________|___H__/__|_____/[][]~\\_______|       |   ";
+  slsl[6]="  |/ |   |-----------I_____I [][] []  D   |=======|__ ";
+  slsl[7]="__/ =| o |=-~~\\  /~~\\  /~~\\  /~~\\ ____Y___________|__ ";
+  slsl[8]=" |/-=|___|=    ||    ||    ||    |_____/~\\___/        ";
+  slsl[9]="  \\_/      \\O=====O=====O=====O_/      \\_/            ";
+
+  const nf=70;
+
+  let frame=new Array(nf);
+  for(let i=0;i<nf;i++){
+    let slframe="";
+    slsl.forEach(function(sl){
+      let sp=""
+      for(let j=0;j<(nf-i);j++){
+        sp=sp+" ";
+      }
+      slframe=slframe+sp+sl+"\n";
+    frame[i]=slframe;    
+    });
+  }
+
+  let sln=0;
+  let id=setInterval(function(){
+    document.getElementById('terminal').value=frame[sln];//slsl[sln];
+    sln++;
+    if(sln > (nf-1)){　
+      clearInterval(id);　//idをclearIntervalで指定している
+      document.getElementById('terminal').value=text;
+      let ta=document.getElementById('terminal');
+      ta.scrollTop = ta.scrollHeight;
+    }
+    }, 33);
+
+}
+
+</script>
+</body>
+</html>
