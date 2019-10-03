@@ -77,7 +77,7 @@ terminal emulator for web
 <input id="x" type="button" value="X">
 <input id="m" type="button" value="□">
 </div>
-<textarea id="terminal" rows="30" cols="160" name="at" onkeydown="count()" onkeyup="cmd()">
+<textarea id="terminal" rows="30" cols="160" wrap="off" name="at" onkeydown="count()" onkeyup="cmd()">
 loading ...</textarea>
 </div>
 
@@ -141,8 +141,22 @@ function gosl(text){
   slsl[7]="__/ =| o |=-~~\\  /~~\\  /~~\\  /~~\\ ____Y___________|__ ";
   slsl[8]=" |/-=|___|=    ||    ||    ||    |_____/~\\___/        ";
   slsl[9]="  \\_/      \\O=====O=====O=====O_/      \\_/            ";
+  let slb = new Array(10);
+  slb[0]="                              ";
+  slb[1]="                              ";
+  slb[2]="    _________________         ";
+  slb[3]="   _|                \\_____A  ";
+  slb[4]=" =|                        |  ";
+  slb[5]=" -|                        |  ";
+  slb[6]="__|________________________|_ ";
+  slb[7]="|__________________________|_ ";
+  slb[8]="   |_D__D__D_|  |_D__D__D_|   ";
+  slb[9]="    \\_/   \\_/    \\_/   \\_/    ";
+  for(let i=0;i<10;i++){
+    slsl[i]=slsl[i]+slb[i];
+  }
 
-  const nf=70;
+  const nf=170;
 
   let frame=new Array(nf);
   for(let i=0;i<nf;i++){
@@ -167,7 +181,7 @@ function gosl(text){
       let ta=document.getElementById('terminal');
       ta.scrollTop = ta.scrollHeight;
     }
-    }, 33);
+    }, 16);
 
 }
 
